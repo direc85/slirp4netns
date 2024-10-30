@@ -1,0 +1,3 @@
+[submodule "slirp4netns"]
+	path = slirp4netns
+	url = https://github.com/rootless-containers/slirp4netns.git
