@@ -18,7 +18,7 @@
 
 Name:           slirp4netns
 Version:        1.3.1
-Release:        0
+Release:        1
 Summary:        User-mode networking for unprivileged network namespaces
 License:        BSD-2-Clause AND GPL-2.0-only AND MIT
 Group:          System/Management
@@ -27,9 +27,7 @@ Source0:        %{name}-%{version}.tar.xz
 BuildRequires:  autoconf
 BuildRequires:  automake
 BuildRequires:  gcc
-BuildRequires:  git
 BuildRequires:  glib2-devel
-BuildRequires:  go-go-md2man
 BuildRequires:  libcap-devel
 BuildRequires:  libseccomp-devel
 BuildRequires:  libslirp-devel
@@ -38,20 +36,15 @@ BuildRequires:  libslirp-devel
 slirp for network namespaces, without copying buffers across the namespaces.
 
 %prep
-%autosetup
+%autosetup -n %{name}-%{version}/%{name}
 
 %build
 ./autogen.sh
 %configure
-%make_build all generate-man
+%make_build all
 
 %install
 install -D -m 0755 %{name} %{buildroot}/%{_bindir}/%{name}
-install -d %{buildroot}/%{_mandir}/man1
-install -m 0644 %{name}.1 %{buildroot}/%{_mandir}/man1
 
 %files
-%doc README.md
-%license COPYING
 %{_bindir}/%{name}
-%{_mandir}/man1/%{name}*.1%{?ext_man}
